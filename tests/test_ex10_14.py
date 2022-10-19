@@ -76,7 +76,9 @@ class TestHomeWork():
         response = requests.get(url, headers={'User-Agent': str(*user_param)})
 
         for param_key in user_param.keys():
+            assert "user_agent" in response.json()
             assert param_key == response.json()['user_agent']
             for param in user_param[param_key].keys():
+                assert param in response.json()
                 assert user_param[param_key][param] == response.json()[param]
 
